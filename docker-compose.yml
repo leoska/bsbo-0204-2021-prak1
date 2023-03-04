@@ -9,7 +9,7 @@ services:
     image: postgres:latest
     hostname: postgres
     container_name: postgres
-    restart: "no"
+    restart: always
     ports:
       - "127.0.0.1:5432:5432"
     networks:
@@ -17,14 +17,14 @@ services:
     volumes:
       - ./data/postgresql:/var/lib/postgresql:rw
     environment:
-      - POSTGRES_USER=mirea
-      - POSTGRES_PASSWORD=mirea
+      - POSTGRES_USER=zx
+      - POSTGRES_PASSWORD=spectrum
 
   pgadmin4:
     image: dpage/pgadmin4:latest
     hostname: pgadmin4
     container_name: pgadmin4
-    restart: "no"
+    restart: always
     ports:
       - "127.0.0.1:8080:80"
     networks:
@@ -32,8 +32,8 @@ services:
     volumes:
       - ./data/pgadmin:/var/lib/pgadmin:rw
     environment:
-      - PGADMIN_DEFAULT_EMAIL=mirea@test.ru
-      - PGADMIN_DEFAULT_PASSWORD=mirea
+      - PGADMIN_DEFAULT_EMAIL=spectrum@test.ru
+      - PGADMIN_DEFAULT_PASSWORD=zx
   
   bsbo-0204-2021:
     image: bsbo-0204-2021:latest
