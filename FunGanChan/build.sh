@@ -1,0 +1,1 @@
+docker build -t bsbo-0204-2021:latest .

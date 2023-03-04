@@ -1,0 +1,46 @@
+
+version: "3.1"
+networks:
+  bsbo-02-04-2021:
+    external: false
+
+services:
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    container_name: postgres
+    restart: "no"
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - bsbo-02-04-2021
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql:rw
+    environment:
+      - POSTGRES_USER=mirea
+      - POSTGRES_PASSWORD=mirea
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    hostname: pgadmin4
+    container_name: pgadmin4
+    restart: "no"
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - bsbo-02-04-2021
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin:rw
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=mirea@test.ru
+      - PGADMIN_DEFAULT_PASSWORD=mirea
+  
+  bsbo-0204-2021:
+    image: bsbo-0204-2021:latest
+    hostname: bsbo-0204-2021
+    container_name: bsbo-0204-2021
+    ports:
+      - "127.0.0.1:8081:8081"
+    volumes:
+      - ./index.js:/app/index.js:ro
+      - ./app:/app/app:ro
